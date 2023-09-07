@@ -31,20 +31,18 @@ app.post('/async', (request,response) => {
 })
 
 app.get('/db', (request,response) => {
-    
     //    make a call to the db, and return the values
     const queryStatement = "SELECT * FROM cars;"
     db.query(queryStatement, (error,result)=>{
         if(error){
             response.status(500).json(error)
         } else {
-            console.log(result)
+            // console.log(result)
             // parse out only the returned rows
             resBody = result.rows
             response.status(200).json(resBody)
         }
     })
-
 })
 
 

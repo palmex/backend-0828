@@ -2,13 +2,16 @@
 // import a library for interfacing with postgres!
 
 const Pool = require('pg').Pool
+const dotenv = require('dotenv')
+
+dotenv.config()
 
 const pool = new Pool({
-    user:'postgres', 
-    host:'localhost', 
-    port:5432, 
-    password:'PosgresRocks123!',
-    database:'stellantis',
+    user:process.env.DB_USER, 
+    host:process.env.DB_HOST, 
+    port:process.env.DB_PORT, 
+    password:process.env.DB_PW,
+    database:process.env.DB_NAME,
 })
 
 module.exports = pool;
