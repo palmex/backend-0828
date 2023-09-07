@@ -7,16 +7,7 @@ carsRouter.use(express.json())
 carsRouter.get('/all', (request,response) => {
     //    make a call to the db, and return the values
     const queryStatement = "SELECT * FROM cars;"
-    db.query(queryStatement, (error,result)=>{
-        if(error){
-            response.status(500).json(error)
-        } else {
-            // console.log(result)
-            // parse out only the returned rows
-            resBody = result.rows
-            response.status(200).json(resBody)
-        }
-    })
+    dbQuery(queryStatement, [], request,response)
 })
 
 carsRouter.post('/new', (request,response) => {
@@ -29,7 +20,11 @@ carsRouter.post('/new', (request,response) => {
 
     const queryStatement = "INSERT INTO cars (make, model, year, odometer) VALUES \
                             ($1,$2,$3,$4) RETURNING*;"
-    db.query(queryStatement,[make, model, year, odometer], (error,result)=>{
+    dbQuery(queryStatement, [make, model, year, odometer], request,response)
+})
+
+const dbQuery = (queryStatement, params, request,response) => {
+    db.query(queryStatement,params, (error,result)=>{
         if(error){
             response.status(500).json(error)
         } else {
@@ -39,7 +34,7 @@ carsRouter.post('/new', (request,response) => {
             response.status(200).json(resBody)
         }
     })
-})
+}
 
 
 
