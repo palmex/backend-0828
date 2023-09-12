@@ -2,6 +2,7 @@
 const express = require('express')
 const db = require('./db')
 const carsRouter = require('./routes/cars')
+const usersRouter = require('./routes/users')
 
 // setting up our app
 const port = 3000
@@ -9,6 +10,7 @@ const app = express()
 app.use(express.json())
 // connecting router to app
 app.use('/cars',carsRouter)
+app.use('/users',usersRouter)
 
 
 // ---- endpoints below ----
