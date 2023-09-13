@@ -3,10 +3,12 @@ const express = require('express')
 const db = require('./db')
 const carsRouter = require('./routes/cars')
 const usersRouter = require('./routes/users')
+const cors = require('cors')
 
 // setting up our app
 const port = 3000
 const app = express()
+app.use(cors())
 app.use(express.json())
 // connecting router to app
 app.use('/cars',carsRouter)

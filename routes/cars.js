@@ -1,3 +1,4 @@
+const { response } = require('express')
 const express = require('express')
 const db = require('../db')
 
@@ -50,6 +51,9 @@ carsRouter.post('/new', (request,response) => {
     console.log('body',request.body)
     const make = request.body.make
     const model = request.body.model
+    // if (!model is string){
+    //     response.status(400).json("this needs to a string")
+    // }
     const year = request.body.year
     const odometer = request.body.odometer
 
